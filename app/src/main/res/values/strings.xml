@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android-Project-OnWe</string>
+    <string name="auth0_domain">dev-ufhap7bbnud8jwgu.us.auth0.com</string>
+    <string name="auth0_client_id">YMca3xyxbIS2b6EoECBUXOSgrf6P7OcB</string>
 </resources>

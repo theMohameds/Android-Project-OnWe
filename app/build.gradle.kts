@@ -17,6 +17,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        manifestPlaceholders["auth0Domain"] = "dev-ufhap7bbnud8jwgu.us.auth0.com"
+        manifestPlaceholders["auth0Scheme"] = "braekbrod"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -51,6 +54,11 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+
+    // Auth0 dependencies
+    implementation("com.auth0.android:auth0:2.+")
+    implementation("androidx.browser:browser:1.5.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

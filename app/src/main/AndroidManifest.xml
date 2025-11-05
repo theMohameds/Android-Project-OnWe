@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProjectOnWe">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -18,10 +19,25 @@
             android:theme="@style/Theme.AndroidProjectOnWe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name="com.auth0.android.provider.RedirectActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="braekbrod"
+                    android:host="dev-ufhap7bbnud8jwgu.us.auth0.com"
+                    android:pathPrefix="/android/com.example.android_project_onwe/callback" />
+            </intent-filter>
+        </activity>
+
+    </application>
 </manifest>

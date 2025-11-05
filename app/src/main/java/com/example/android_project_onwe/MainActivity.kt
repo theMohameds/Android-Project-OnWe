@@ -1,94 +1,90 @@
 package com.example.android_project_onwe
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import com.example.android_project_onwe.ui.theme.AndroidProjectOnWeTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var auth0Manager: Auth0Manager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        auth0Manager = Auth0Manager(this)
+
         setContent {
             AndroidProjectOnWeTheme {
-                AndroidProjectOnWeApp()
+                LoginScreen(auth0Manager)
             }
         }
     }
 }
 
-@PreviewScreenSizes
 @Composable
-fun AndroidProjectOnWeApp() {
-    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
+fun LoginScreen(auth0Manager: Auth0Manager) {
+    var isLoggedIn by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
-    NavigationSuiteScaffold(
-        navigationSuiteItems = {
-            AppDestinations.entries.forEach {
-                item(
-                    icon = {
-                        Icon(
-                            it.icon,
-                            contentDescription = it.label
-                        )
-                    },
-                    label = { Text(it.label) },
-                    selected = it == currentDestination,
-                    onClick = { currentDestination = it }
-                )
-            }
-        }
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
     ) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            if (isLoggedIn) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "You are logged in!",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    Button(onClick = {
+                        auth0Manager.logout(context) {
+                            isLoggedIn = false
+                            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
+                        }
+                    }) {
+                        Text("Logout")
+                    }
+                }
+            } else {
+                Button(onClick = {
+                    auth0Manager.login(context) { credentials ->
+                        if (credentials != null) {
+                            isLoggedIn = true
+                            Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }) {
+                    Text("Login with Auth0")
+                }
+            }
         }
     }
-}
-
-enum class AppDestinations(
-    val label: String,
-    val icon: ImageVector,
-) {
-    HOME("Home", Icons.Default.Home),
-    FAVORITES("Favorites", Icons.Default.Favorite),
-    PROFILE("Profile", Icons.Default.AccountBox),
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun PreviewLoginScreen() {
     AndroidProjectOnWeTheme {
-        Greeting("Android")
+        LoginScreen(auth0Manager = Auth0Manager(LocalContext.current))
     }
 }

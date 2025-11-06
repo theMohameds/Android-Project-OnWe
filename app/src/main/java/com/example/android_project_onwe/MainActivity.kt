@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.android_project_onwe.auth0.Auth0Manager
 import com.example.android_project_onwe.ui.theme.AndroidProjectOnWeTheme
 
 class MainActivity : ComponentActivity() {

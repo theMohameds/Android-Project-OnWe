@@ -1,4 +1,4 @@
-package com.example.android_project_onwe
+package com.example.android_project_onwe.auth0
 
 import android.content.Context
 import com.auth0.android.Auth0
@@ -6,6 +6,7 @@ import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
 import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
+import com.example.android_project_onwe.R
 
 class Auth0Manager(context: Context) {
 

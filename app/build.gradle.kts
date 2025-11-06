@@ -6,14 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.android_project_onwe"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36 // 🆕 ændret tilbage til 36, krævet af nye AndroidX-biblioteker
 
     defaultConfig {
         applicationId = "com.example.android_project_onwe"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 36 // 🆕 ændret tilbage til 36 for at matche compileSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -29,15 +27,20 @@ android {
             )
         }
     }
+
+    // ✅ FIX HER — brug JavaVersion.VERSION_11 (ikke bare VERSION_11)
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+        viewBinding = true // valgfrit — hjælper hvis du vil bruge XML-view binding
     }
 }
 
@@ -51,6 +54,19 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+
+
+    // Fragment og ViewModel (krævet til RegistrationFragment)
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.4")
+
+    // Navigation (valgfrit men anbefalet til fremtidige skærme)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

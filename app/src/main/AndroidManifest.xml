@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProjectOnWe">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -18,10 +19,16 @@
             android:theme="@style/Theme.AndroidProjectOnWe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 🆕 Ny aktivitet til fragment-delen (User Registration / AppCompat UI) -->
+        <activity
+            android:name=".MainActivityWithFragment"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompatFragment" />
+
     </application>
 
 </manifest>

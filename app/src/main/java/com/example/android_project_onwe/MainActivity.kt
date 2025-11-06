@@ -25,6 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.android_project_onwe.ui.theme.AndroidProjectOnWeTheme
 
+// 🆕 Tilføjet import for din registreringsskærm (fra din egen kode)
+import com.example.android_project_onwe.view.RegistrationScreen
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +63,22 @@ fun AndroidProjectOnWeApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+
+            // 🆕 Ændring: Tilføjet mulighed for at åbne din User Registration
+            when (currentDestination) {
+                AppDestinations.HOME -> Greeting(
+                    name = "Android",
+                    modifier = Modifier.padding(innerPadding)
+                )
+
+                AppDestinations.FAVORITES -> Text(
+                    "Favorites page (demo)",
+                    modifier = Modifier.padding(innerPadding)
+                )
+
+                // 🆕 Ny skærm: Din User Registration vises her
+                AppDestinations.PROFILE -> RegistrationScreen(modifier = Modifier.padding(innerPadding))
+            }
         }
     }
 }
@@ -74,7 +89,7 @@ enum class AppDestinations(
 ) {
     HOME("Home", Icons.Default.Home),
     FAVORITES("Favorites", Icons.Default.Favorite),
-    PROFILE("Profile", Icons.Default.AccountBox),
+    PROFILE("User Registration", Icons.Default.AccountBox), // 🆕 Opdateret label for klarhed
 }
 
 @Composable

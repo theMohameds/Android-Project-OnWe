@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Dette var din oprindelige app-theme -->
     <style name="Theme.AndroidProjectOnWe" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- 🆕 Nyt tema til fragment-baserede aktiviteter (AppCompat) -->
+    <style name="Theme.AppCompatFragment" parent="Theme.AppCompat.Light.NoActionBar" />
+
 </resources>

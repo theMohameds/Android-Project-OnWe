@@ -59,6 +59,20 @@ dependencies {
     implementation("com.auth0.android:auth0:2.+")
     implementation("androidx.browser:browser:1.5.0")
 
+    //viewModel + coroutines
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
+// Material icons for Compose
+    implementation("androidx.compose.material:material-icons-extended")
+
+    //Compose <-> lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
+
+    // Navigation for Compose
+    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation(libs.androidx.compose.animation.core.lint)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

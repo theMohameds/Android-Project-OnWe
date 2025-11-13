@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +26,6 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_project_onwe.ui.theme.AndroidProjectOnWeTheme
-import com.example.android_project_onwe.view.ProfileScreen
 import com.example.android_project_onwe.view.LoginScreen
 import com.example.android_project_onwe.viewmodel.AuthViewModel
 
@@ -120,18 +120,6 @@ fun LoggedInApp() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            // Added to display ProfileScreen when the user selects "Profile"
-            when (currentDestination) {
-                AppDestinations.HOME -> Greeting(
-                    name = "Android",
-                    modifier = Modifier.padding(innerPadding)
-                )
-
-                AppDestinations.PROFILE -> ProfileScreen( //  shows the Profile Management UI
-                    modifier = Modifier.padding(innerPadding)
-                )
-
         Scaffold(
             bottomBar = {
                 NavigationBar {
@@ -160,6 +148,7 @@ fun LoggedInApp() {
 
 enum class AppDestinations(val label: String, val icon: ImageVector) {
     HOME("Home", Icons.Default.Home),
+    FAVORITES("Favorites", Icons.Default.Favorite),
     PROFILE("Profile", Icons.Default.AccountBox),
 }
 

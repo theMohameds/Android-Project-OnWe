@@ -10,6 +10,7 @@ data class User(
     val name: String,
     val isOwed: Boolean = false,
     val owedAmount: Double = 0.0
+
 )
 
 /**

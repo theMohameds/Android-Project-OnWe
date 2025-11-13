@@ -2,6 +2,7 @@ package com.example.android_project_onwe
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -49,6 +51,7 @@ class MainActivity : ComponentActivity() {
         }
     // ----- END NOTIFICATION RELATED -----
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -95,20 +98,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AndroidProjectOnWeApp(authViewModel: AuthViewModel) {
-    val isUserLoggedIn by authViewModel.isLoggedIn.collectAsState()
+    // Temporary: Always show main app for testing
+    AppNavigation()
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        if (!isUserLoggedIn) {
-            // Show login screen if not logged in
-            LoginScreen(authViewModel)
-        } else {
-            // Show the main app with bottom navigation
-            LoggedInApp()
-        }
-    }
+    // Original code (commented out for now):
+    // val isUserLoggedIn by authViewModel.isLoggedIn.collectAsState()
+    // if (!isUserLoggedIn) {
+    //     LoginScreen(authViewModel)
+    // } else {
+    //     AppNavigation()
+    // }
 }
 
 @Composable
